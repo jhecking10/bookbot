@@ -1,4 +1,4 @@
-def main():    
+def open_book():    
     try:
         with open("books/frankenstein.txt") as f:
             file_contents = f.read()
@@ -35,14 +35,16 @@ def convert_dict_to_list(char_dict):
 def sort_on(dict):
     return dict["count"]
 
-file_contents = main()
-word_count = count_words(file_contents)
-char_dict = character_count(file_contents)
-char_list = convert_dict_to_list(char_dict)
-char_list.sort(reverse=True, key=sort_on)
+def main():
+    file_contents = open_book()
+    word_count = count_words(file_contents)
+    char_dict = character_count(file_contents)
+    char_list = convert_dict_to_list(char_dict)
+    char_list.sort(reverse=True, key=sort_on)
+    print("--- Begin report of books/frankenstein.txt ---")
+    print(f"{word_count} words found in the document\n")
+    for char_data in char_list:
+        print(f"The '{char_data['char']}' character was found {char_data['count']} times")
+    print("--- End report ---")
 
-print("--- Begin report of books/frankenstein.txt ---")
-print(f"{word_count} words found in the document\n")
-for char_data in char_list:
-    print(f"The '{char_data['char']}' character was found {char_data['count']} times")
-print("--- End report ---")
+main()
